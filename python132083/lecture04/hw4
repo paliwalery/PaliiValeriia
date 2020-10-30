@@ -1,1 +1,41 @@
+s = input()
+if not s.isdigit():
+    exit(1)
+n = int(s)
+if n < 2:
+    exit(1)
+# создаем список чисел от 0 до n, включительно
+num = [i for i in range(0, n + 1)]
+
+# или то же самое
+# numbers = []
+# for i in range(n + 1):
+#     numbers.append(i)
+
+# если элемент равен 0, то считаем его вычеркнутым
+# сразу вычеркиваем 1
+num[1] = 0
+
+print(num)
+# само решето
+
+for p in num:
+    if p == 0:
+        continue
+        
+    for k in range(2*p, n + 1, p):
+        num[k] = 0
+ 
+# осталось забрать оставшиеся "невычеркнутые числа"
+primes = [elem for elem in num if elem != 0]
+print (primes)
+# или тоже самое, но в несколько строчек
+# primes = []
+# for elem in numbers:
+#     if elem != 0:
+#        primes.append(elem)
+   
+# вывод на печать
+#for prime in primes:
+#    print(prime)
 
