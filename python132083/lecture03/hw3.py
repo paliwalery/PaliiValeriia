@@ -21,15 +21,12 @@ if grad not in ["F", "C"]:
 terms = tempnum.split(".")
 
 if not(0 < len(terms) <= 2):
-    print('Введите корректную температуру в цельсиях (С) или фаренгейтах (F)')
     exit(1)
 
 if len(terms) == 1 and not terms[0].isdigit():
-    print('Введите корректную температуру в цельсиях (С) или фаренгейтах (F)')
     exit(1)
     
 if len(terms) == 2 and (not terms[0].isdigit() or not terms[1].isdigit()):
-    print('Введите корректную температуру в цельсиях (С) или фаренгейтах (F)')
     exit(1)
     
 tempnum = float(tempnum)
