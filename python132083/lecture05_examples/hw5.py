@@ -45,7 +45,25 @@ print (x)
 
 #Вывести все элементы списка, стоящие до максимального элемента этого списка
 
-
+import random
+# создаем список случаных 10 элементов 
+num = [random.randint(0, 100) for _ in range(10)]
+print(num)
+a = max(num)
+print(a)
+numbers = []
+for i in range(len(num)):
+      if num[i] == a:
+            num[i] = 0
+i = 0
+while i < len(num):
+    if num[i] !=0:
+        numbers.append(num[i])
+        i += 1
+    else:
+        break
+      
+print(numbers)
 
 
 #Дан список X и число A. Вычислить сумму всех отрицательных элементов списка Х, значения которых больше, чем A. Подсчитать также количество таких элементов.
