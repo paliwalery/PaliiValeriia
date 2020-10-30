@@ -44,7 +44,7 @@ if a // 10 = 9:
 
 
 if a == 0:
-    answer = answer + 'нуль' # answer += 'нуль'
+    answer = 'нуль'
 elif a % 10 == 1:
     answer = answer + 'один'
 elif a % 10 == 2:
