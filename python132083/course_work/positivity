@@ -18,7 +18,7 @@ expInfo['date'] = data.getDateStr()  # add a simple timestamp
 expInfo['expName'] = expName
 
 # Data file name stem = absolute path + name; later add .psyexp, .csv, .log, etc
-filename = u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])
+filename = 'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName,
     extraInfo=expInfo, 
