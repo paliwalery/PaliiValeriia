@@ -1,13 +1,7 @@
-from __future__ import absolute_import, division
-
-from psychopy import locale_setup
-from psychopy import prefs
 from psychopy import sound, gui, visual, core, data, event, logging, clock
-from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
-                                STOPPED, FINISHED, PRESSED, RELEASED, FOREVER)
-from numpy.random import random, randint, normal, shuffle
+from psychopy.constants import (NOT_STARTED, STARTED, FINISHED)
+from numpy.random import random
 import os  # handy system and path functions
-import sys  # to get file system encoding
 from psychopy.hardware import keyboard
 
 # Ensure that relative paths start from the same directory as this script
