@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 from __future__ import absolute_import, division
 
 from psychopy import locale_setup
@@ -7,52 +5,38 @@ from psychopy import prefs
 from psychopy import sound, gui, visual, core, data, event, logging, clock
 from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
                                 STOPPED, FINISHED, PRESSED, RELEASED, FOREVER)
-
 from numpy.random import random, randint, normal, shuffle
 import os  # handy system and path functions
 import sys  # to get file system encoding
-
 from psychopy.hardware import keyboard
 
-
-
 # Ensure that relative paths start from the same directory as this script
-_thisDir = os.path.dirname(os.path.abspath(__file__))
-os.chdir(_thisDir)
+thisDir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(thisDir)
 
 # Store info about the experiment session
-#psychopyVersion = '2020.2.10'
 expName = 'positivity'  
 expInfo = {'participant': ''}
-dlg = gui.DlgFromDict(dictionary=expInfo, sortKeys=False, title=expName)
+dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False:
     core.quit()  # user pressed cancel
 expInfo['date'] = data.getDateStr()  # add a simple timestamp
 expInfo['expName'] = expName
-#expInfo['psychopyVersion'] = psychopyVersion
 
 # Data file name stem = absolute path + name; later add .psyexp, .csv, .log, etc
-filename = _thisDir + os.sep + u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])
-
+filename = u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])
 # An ExperimentHandler isn't essential but helps with data saving
-thisExp = data.ExperimentHandler(name=expName, version='',
-    extraInfo=expInfo, runtimeInfo=None,
-    originPath='C:\\Users\\user\\Desktop\\posotovity\\positivity.py',
-    savePickle=True, saveWideText=True,
+thisExp = data.ExperimentHandler(name=expName,
+    extraInfo=expInfo, 
+    saveWideText=True,
     dataFileName=filename)
-# save a log file for detail verbose info
-#logFile = logging.LogFile(filename+'.log', level=logging.EXP)
-#logging.console.setLevel(logging.WARNING)  # this outputs to the screen, not a file
 
 endExpNow = False  # flag for 'escape' or other condition => quit the exp
 frameTolerance = 0.001  # how close to onset before 'same' frame
-
 # Setup the Window
 win = visual.Window(
-    size=[1600, 900], #screen=0
-    winType='pyglet', allowGUI=True, allowStencil=False,
-    monitor='testMonitor', color=[0,0,0], colorSpace='rgb',
-    blendMode='avg', useFBO=True, 
+    size=[1600, 900], 
+    color=[0,0,0], colorSpace='rgb',
     units='norm')
 
 # create a default keyboard (e.g. to check for escape)
@@ -64,38 +48,27 @@ instr = visual.TextStim(win=win, name='instr',
     font='Garamond',
     pos=(0, 0.4), height=0.055, wrapWidth=1.2, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
-    languageStyle='LTR',
+    languageStyle='LTR', #left-to-right
     depth=0.0);
 text = visual.TextStim(win=win, name='text',
     text='default text',
     font='Garamond',
     pos=(0, 0.15), height=0.1, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
-    languageStyle='LTR',
-    depth=-1.0);
+    languageStyle='LTR', depth=-1.0);
 slider = visual.Slider(win=win, name='slider',
     size=(1, 0.05), pos=(0, -0.1),
     labels=["1\nНегативное", "2\nСкорее негативное", "3\nНейтральное", "4\nСкорее позитивное", "5\nПозитивное"], ticks=(1, 2, 3, 4, 5),
     granularity=1, style=['rating', 'triangleMarker'], labelHeight = .05,
-    color='white', font='Garamond',
-    flip=False, depth=-2)
+    color='white', font='Garamond', depth=-2)
 slider.marker.size=(0.15, 0.075)
 slider.marker.color="blue"
 
-#globalClock = core.Clock()  # to track the time since experiment started
-routineTimer = core.CountdownTimer()  # to track time remaining of each (non-slip) routine 
-
 # set up handler to look after randomisation of conditions etc
 trials = data.TrialHandler(nReps=1, method='random', 
-    extraInfo=expInfo, originPath=-1,
-    trialList=data.importConditions('posit.xlsx'),
-    seed=None, name='trials')
+    trialList=data.importConditions('posit.xlsx'))
 thisExp.addLoop(trials)  # add the loop to the experiment
 thisTrial = trials.trialList[0]  # so we can initialise stimuli with some values
-# abbreviate parameter names if possible (e.g. rgb = thisTrial.rgb)
-if thisTrial != None:
-    for paramName in thisTrial:
-        exec('{} = thisTrial[paramName]'.format(paramName))
 
 for thisTrial in trials:
     currentLoop = trials
@@ -113,9 +86,7 @@ for thisTrial in trials:
     trialComponents = [instr, text, slider]
     for thisComponent in trialComponents:
         thisComponent.tStart = None
-        thisComponent.tStop = None
         thisComponent.tStartRefresh = None
-        thisComponent.tStopRefresh = None
         if hasattr(thisComponent, 'status'):
             thisComponent.status = NOT_STARTED
     # reset timers
@@ -129,7 +100,6 @@ for thisTrial in trials:
         # get current time
         t = trialClock.getTime()
         tThisFlip = win.getFutureFlipTime(clock=trialClock)
-        tThisFlipGlobal = win.getFutureFlipTime(clock=None)
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
         
@@ -138,7 +108,6 @@ for thisTrial in trials:
             # keep track of start time/frame for later
             instr.frameNStart = frameN  # exact frame index
             instr.tStart = t  # local t and not account for scr refresh
-            instr.tStartRefresh = tThisFlipGlobal  # on global time
             win.timeOnFlip(instr, 'tStartRefresh')  # time at next scr refresh
             instr.setAutoDraw(True)
         
@@ -147,7 +116,6 @@ for thisTrial in trials:
             # keep track of start time/frame for later
             text.frameNStart = frameN  # exact frame index
             text.tStart = t  # local t and not account for scr refresh
-            text.tStartRefresh = tThisFlipGlobal  # on global time
             win.timeOnFlip(text, 'tStartRefresh')  # time at next scr refresh
             text.setAutoDraw(True)
         
@@ -156,7 +124,6 @@ for thisTrial in trials:
             # keep track of start time/frame for later
             slider.frameNStart = frameN  # exact frame index
             slider.tStart = t  # local t and not account for scr refresh
-            slider.tStartRefresh = tThisFlipGlobal  # on global time
             win.timeOnFlip(slider, 'tStartRefresh')  # time at next scr refresh
             slider.setAutoDraw(True)
         
@@ -165,7 +132,7 @@ for thisTrial in trials:
             continueRoutine = False
         
         # check for quit (typically the Esc key)
-        if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
+        if defaultKeyboard.getKeys(keyList=["escape"]):
             core.quit()
         
         # check if all components have finished
@@ -187,20 +154,16 @@ for thisTrial in trials:
             thisComponent.setAutoDraw(False)
     trials.addData('slider.response', slider.getRating())
     # the Routine "trial" was not non-slip safe, so reset the non-slip timer
-    routineTimer.reset()
     thisExp.nextEntry()
     
 # completed 1 repeat of 'trials'
-
-
 # Flip one final time so any remaining win.callOnFlip() 
 # and win.timeOnFlip() tasks get executed before quitting
-win.flip()
+win.flip()  #This replaces the update() method, better reflecting what is happening underneath
 
 # these shouldn't be strictly necessary (should auto-save)
 thisExp.saveAsWideText(filename+'.csv', delim='auto')
-#thisExp.saveAsPickle(filename)
-#logging.flush()
+
 # make sure everything is closed down
 thisExp.abort()  # or data files will save again on exit
 win.close()
